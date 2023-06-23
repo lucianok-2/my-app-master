@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
-import ProductList from './components/ProductList';
+import ProductList from './components/ExcersiceList';
 import './index.css';
 
 const App = () => {
