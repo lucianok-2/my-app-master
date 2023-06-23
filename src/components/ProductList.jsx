@@ -37,7 +37,7 @@ export const ProductList = ({
 						<p>{product.descripcion}</p>
 						<p className='price'>Repeticiones :{product.repeticiones}</p>
 						<button onClick={() => onAddProduct(product)}>
-							Añadir al carrito
+							Añadir a la rutina
 						</button>
 					</div>
 				</div>
