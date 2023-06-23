@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Header } from './components/Header';
-import { ProductList } from './components/ProductList';
+import ProductList from './components/ProductList'; // Corregir la importación aquí
 import { data } from './data';
+
 
 
 function App() {
