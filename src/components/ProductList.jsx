@@ -88,6 +88,13 @@ const ProductList = ({
           <p>No se ha añadido ningún ejercicio a la rutina.</p>
         )}
       </div>
+
+      <style jsx>{`
+        .search-bar {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+      `}</style>
     </div>
   );
 };
