@@ -1,4 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+
+const useLocalStorage = (key, initialValue) => {
+  const [value, setValue] = useState(() => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+};
 
 export const Header = ({
   allProducts,
@@ -9,25 +22,27 @@ export const Header = ({
   setTotal,
   addProduct,
 }) => {
-  const [active, setActive] = useState(false);
-  const [routineName, setRoutineName] = useState('');
+  const [active, setActive] = useLocalStorage('active', false);
 
-  const onDeleteProduct = (product) => {
-    const results = allProducts.filter((item) => item.id !== product.id);
-    const productQuantity = product.quantity;
+  const handleDeleteProduct = useCallback(
+    (product) => {
+      const updatedProducts = allProducts.filter((item) => item.id !== product.id);
+      const productQuantity = product.quantity;
 
-    setTotal(total - product.duration * productQuantity);
-    setCountProducts(countProducts - productQuantity);
-    setAllProducts(results);
-  };
+      setTotal((prevTotal) => prevTotal - product.duration * productQuantity);
+      setCountProducts((prevCount) => prevCount - productQuantity);
+      setAllProducts(updatedProducts);
+    },
+    [allProducts, setAllProducts, setTotal, setCountProducts]
+  );
 
-  const onCleanCart = () => {
+  const handleCleanCart = useCallback(() => {
     setAllProducts([]);
     setTotal(0);
     setCountProducts(0);
-  };
+  }, [setAllProducts, setTotal, setCountProducts]);
 
-  const onCreateRoutine = () => {
+  const handleCreateRoutine = useCallback(() => {
     if (allProducts.length > 0) {
       const newRoutine = {
         id: Date.now(),
@@ -36,18 +51,42 @@ export const Header = ({
         name: `Rutina ${allProducts[0].nameEjercicio}`,
       };
       addProduct(newRoutine);
-      onCleanCart();
+      handleCleanCart();
     }
-  };
+  }, [allProducts, total, addProduct, handleCleanCart]);
+
+  useEffect(() => {
+    const savedCartItems = localStorage.getItem('cartItems');
+    const savedTotal = localStorage.getItem('total');
+    const savedCountProducts = localStorage.getItem('countProducts');
+
+    if (savedCartItems) {
+      setAllProducts(JSON.parse(savedCartItems));
+    }
+
+    if (savedTotal) {
+      setTotal(parseInt(savedTotal));
+    }
+
+    if (savedCountProducts) {
+      setCountProducts(parseInt(savedCountProducts));
+    }
+  }, [setAllProducts, setTotal, setCountProducts]);
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(allProducts));
+    localStorage.setItem('total', total.toString());
+    localStorage.setItem('countProducts', countProducts.toString());
+  }, [allProducts, total, countProducts]);
 
   return (
     <header>
-      <h1>Rutinas de Ejercicios</h1>
+      <h1 style={{ textAlign: 'center' }}>Rutinas de Ejercicios</h1>
 
       <div className="container-icon">
         <div
           className="container-cart-icon"
-          onClick={() => setActive(!active)}
+          onClick={() => setActive((prevActive) => !prevActive)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +121,7 @@ export const Header = ({
                       <span className="titulo-producto-carrito">
                         {product.nameEjercicio}
                       </span>
-                      
+
                       <span className="repeticiones-producto-carrito">
                         Repeticiones: {product.repeticiones}
                       </span>
@@ -94,7 +133,7 @@ export const Header = ({
                       strokeWidth="1.5"
                       stroke="currentColor"
                       className="icon-close"
-                      onClick={() => onDeleteProduct(product)}
+                      onClick={() => handleDeleteProduct(product)}
                     >
                       <path
                         strokeLinecap="round"
@@ -113,10 +152,10 @@ export const Header = ({
                 </span>
               </div>
 
-              <button className="btn-clear-all" onClick={onCleanCart}>
+              <button className="btn-clear-all" onClick={handleCleanCart}>
                 Limpiar Rutina
               </button>
-              <button className="btn-crear" onClick={onCreateRoutine}>
+              <button className="btn-crear" onClick={handleCreateRoutine}>
                 Crear Rutina
               </button>
             </>

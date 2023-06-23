@@ -11,14 +11,23 @@ const ProductList = ({
   addProduct,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
   const filteredData = data.filter((product) =>
     product.nameEjercicio.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const sortedData = selectedCategory
+    ? filteredData.filter((product) => product.categoria === selectedCategory)
+    : filteredData;
 
   const formatDuration = (duration) => {
     const minutes = Math.floor(duration / 60);
@@ -41,10 +50,7 @@ const ProductList = ({
     setAllProducts([...allProducts, product]);
   };
 
-  const onRemoveProduct = (product) => {
-    const updatedRoutines = allProducts.filter((item) => item.id !== product.id);
-    setAllProducts(updatedRoutines);
-  };
+  
 
   return (
     <div className="container">
@@ -55,10 +61,17 @@ const ProductList = ({
           value={searchTerm}
           onChange={handleSearch}
         />
+        <select value={selectedCategory} onChange={handleCategoryChange}>
+          <option value="">Todas las categorías</option>
+          <option value="Cardio">Cardio</option>
+          <option value="Piernas">Piernas</option>
+          <option value="Core">Core</option>
+          <option value="Espalda">Espalda</option>
+        </select>
       </div>
 
       <div className="container-items">
-        {filteredData.map((product) => (
+        {sortedData.map((product) => (
           <div className="item" key={product.id}>
             <figure>
               <img src={product.img} alt={product.nameEjercicio} />
@@ -66,26 +79,27 @@ const ProductList = ({
             <div className="info-product">
               <h2>{product.nameEjercicio}</h2>
               <p>{product.descripcion}</p>
-              <p className="price">Duración: {formatDuration(product.duracion)}</p>
+              <p className="duration">Duración: {formatDuration(product.duracion)}</p>
+              <p className="repetitions">Repeticiones: {product.repeticiones}</p>
               <button onClick={() => onAddProduct(product)}>Añadir a la rutina</button>
             </div>
-            
           </div>
         ))}
       </div>
 
       <style jsx>{`
         .container {
-          text-align: center;
+          padding: 20px;
         }
 
         .search-bar {
+          text-align: center;
           margin-bottom: 20px;
         }
 
         .container-items {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(1, 1fr);
           gap: 20px;
         }
 
@@ -122,7 +136,8 @@ const ProductList = ({
           position: relative;
         }
 
-        .price {
+        .duration,
+        .repetitions {
           font-size: 18px;
           font-weight: 900;
         }
@@ -136,15 +151,16 @@ const ProductList = ({
           cursor: pointer;
         }
 
-        .remove-button {
-          border: none;
-          background: none;
-          color: red;
-          font-size: 20px;
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          cursor: pointer;
+        @media (min-width: 768px) {
+          .container-items {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .container-items {
+            grid-template-columns: repeat(3, 1fr);
+          }
         }
       `}</style>
     </div>
