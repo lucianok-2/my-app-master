@@ -8,6 +8,7 @@ const ProductList = ({
   setCountProducts,
   total,
   setTotal,
+  addProduct,
 }) => {
   const [routine, setRoutine] = useState([]);
   const [routineDuration, setRoutineDuration] = useState(0);
@@ -22,9 +23,7 @@ const ProductList = ({
 
     if (allProducts.find((item) => item.id === product.id)) {
       const products = allProducts.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
       setTotal(total + product.duracion);
       setCountProducts(countProducts + 1);
@@ -48,6 +47,18 @@ const ProductList = ({
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
     return `${minutes} min ${seconds} seg`;
+  };
+
+  const onCreateRoutine = () => {
+    const routineData = {
+      name: `Rutina ${routine[0].nameEjercicio}`,
+      exercises: routine,
+      duration: routineDuration,
+    };
+    addProduct(routineData);
+
+    setRoutine([]);
+    setRoutineDuration(0);
   };
 
   return (
@@ -86,4 +97,5 @@ const ProductList = ({
     </div>
   );
 };
+
 export default ProductList;

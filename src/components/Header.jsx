@@ -7,8 +7,10 @@ export const Header = ({
   countProducts,
   setCountProducts,
   setTotal,
+  addProduct,
 }) => {
   const [active, setActive] = useState(false);
+  const [routineName, setRoutineName] = useState('');
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
@@ -23,6 +25,19 @@ export const Header = ({
     setAllProducts([]);
     setTotal(0);
     setCountProducts(0);
+  };
+
+  const onCreateRoutine = () => {
+    if (allProducts.length > 0) {
+      const newRoutine = {
+        id: Date.now(),
+        exercises: allProducts,
+        duration: total,
+        name: `Rutina ${allProducts[0].nameEjercicio}`,
+      };
+      addProduct(newRoutine);
+      onCleanCart();
+    }
   };
 
   return (
@@ -100,6 +115,9 @@ export const Header = ({
 
               <button className="btn-clear-all" onClick={onCleanCart}>
                 Limpiar Rutina
+              </button>
+              <button className="btn-crear" onClick={onCreateRoutine}>
+                Crear Rutina
               </button>
             </>
           ) : (
