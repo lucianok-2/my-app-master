@@ -4,7 +4,7 @@ export const data = [
     img: 'https://images.unsplash.com/photo-1577221084712-45b0445d2b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=698&q=80',
     nameEjercicio: 'Abdominales',
     descripcion: 'Realiza abdominales para fortalecer los músculos abdominales. Recuerda mantener una postura adecuada y respirar correctamente durante el ejercicio.',
-    duracion: 10,
+    duracion: 120,
     repeticiones: '2x3',
   },
   {
@@ -12,7 +12,7 @@ export const data = [
     img: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80',
     nameEjercicio: 'Barra',
     descripcion: 'Haz levantamientos en barra para trabajar los músculos de la espalda y los brazos. Este ejercicio es ideal para desarrollar fuerza y mejorar tu resistencia. Asegúrate de mantener una buena técnica y progresar gradualmente en el peso utilizado.',
-    duracion: 12,
+    duracion: 120,
     repeticiones: '3x4',
   },
   {
@@ -20,7 +20,7 @@ export const data = [
     img: 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=870&amp;q=80',
     nameEjercicio: 'Peso muerto',
     descripcion: 'Realiza el ejercicio de peso muerto para fortalecer la musculatura de la espalda, los glúteos y los isquiotibiales. Este es un ejercicio compuesto que te ayudará a desarrollar fuerza y mejorar tu postura. Asegúrate de mantener una técnica adecuada y progresar gradualmente en el peso utilizado.',
-    duracion: 15,
+    duracion: 180,
     repeticiones: '2x5',
   },
   {
@@ -36,7 +36,7 @@ export const data = [
     img: 'https://images.unsplash.com/photo-1593494418158-38517e0b23ef?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=388&amp;q=80',
     nameEjercicio: 'Tiro con cuerda',
     descripcion: 'Realiza el ejercicio de tiro con cuerda para trabajar los músculos de los brazos, los hombros y los músculos centrales. Este ejercicio te ayudará a mejorar tu resistencia y coordinación. Asegúrate de mantener una postura estable y utilizar un rango de movimiento completo durante el ejercicio.',
-    duracion: 8,
+    duracion: 30,
     repeticiones: '2x20',
   },
   {
@@ -44,7 +44,7 @@ export const data = [
     img: 'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=725&amp;q=80',
     nameEjercicio: 'Ejercicio en T',
     descripcion: 'Realiza el ejercicio en T para trabajar los músculos de la espalda, los hombros y los músculos centrales. Este ejercicio te ayudará a mejorar tu postura y estabilidad. Asegúrate de mantener una técnica adecuada y controlar el movimiento en todo momento.',
-    duracion: 10,
+    duracion: 35,
     repeticiones: '2x10',
   },
   {
@@ -52,7 +52,7 @@ export const data = [
     img: 'https://plus.unsplash.com/premium_photo-1666736569549-c106f7921d87?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=388&amp;q=80',
     nameEjercicio: 'Sentadillas',
     descripcion: 'Realiza sentadillas para trabajar los músculos de las piernas y los glúteos. Este ejercicio es excelente para desarrollar fuerza y potencia en la parte inferior del cuerpo. Asegúrate de mantener una técnica adecuada y utilizar un rango de movimiento completo.',
-    duracion: 12,
+    duracion: 300,
     repeticiones: '3x6',
   },
   {
@@ -60,7 +60,7 @@ export const data = [
     img: 'https://images.unsplash.com/photo-1518644961665-ed172691aaa1?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=870&amp;q=80',
     nameEjercicio: 'Flexiones',
     descripcion: 'Realiza flexiones para trabajar los músculos del pecho, los brazos y los hombros. Este ejercicio es excelente para desarrollar fuerza en la parte superior del cuerpo. Asegúrate de mantener una técnica adecuada y controlar la respiración durante el ejercicio.',
-    duracion: 8,
+    duracion: 300,
     repeticiones: '3x8',
   },
   {
@@ -68,15 +68,15 @@ export const data = [
     img: 'https://images.unsplash.com/photo-1626444231642-6bd985bca16a?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=869&amp;q=80',
     nameEjercicio: 'Plancha',
     descripcion: 'Realiza la plancha para fortalecer los músculos centrales, incluyendo el abdomen y la espalda baja. Este ejercicio es excelente para mejorar tu estabilidad y resistencia. Asegúrate de mantener una postura recta y contraer los músculos correctamente durante el ejercicio.',
-    duracion: 10,
-    repeticiones: '2x30 segundos',
+    duracion: 180,
+    repeticiones: '2x30',
   },
   {
     id: 10,
     img: 'https://cdn.pixabay.com/photo/2016/09/21/22/59/sport-1685936_960_720.jpg 1x, https://cdn.pixabay.com/photo/2016/09/21/22/59/sport-1685936_1280.jpg',
     nameEjercicio: 'Burpees',
     descripcion: 'Realiza burpees para trabajar todo el cuerpo y mejorar tu resistencia. Este ejercicio combina flexiones, saltos y sentadillas, y es ideal para quemar calorías y fortalecer los músculos. Asegúrate de mantener un ritmo constante y una técnica adecuada durante el ejercicio.',
-    duracion: 15,
+    duracion: 60,
     repeticiones: '3x8',
   },
 ];
