@@ -13,6 +13,12 @@ const App = () => {
     setRoutines([...routines, routine]);
   };
 
+  const deleteRoutine = (index) => {
+    const updatedRoutines = [...routines];
+    updatedRoutines.splice(index, 1);
+    setRoutines(updatedRoutines);
+  };
+
   return (
     <div className="App">
       <Header
@@ -33,7 +39,7 @@ const App = () => {
         setTotal={setTotal}
         addProduct={addProduct}
       />
-      {/* Renderiza aquí las rutinas */}
+      
       <div className="routines-container">
         {routines.map((routine, index) => (
           <div className="routine-card" key={index}>
@@ -46,6 +52,7 @@ const App = () => {
               ))}
             </ul>
             <p>Duración Total: {routine.duration} seg</p>
+            <button onClick={() => deleteRoutine(index)}>Eliminar</button>
           </div>
         ))}
       </div>

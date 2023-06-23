@@ -10,30 +10,7 @@ const ProductList = ({
   setTotal,
   addProduct,
 }) => {
-  const [routine, setRoutine] = useState([]);
-  const [routineDuration, setRoutineDuration] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
-
-  const onAddProduct = (product) => {
-    const updatedRoutine = [...routine, product];
-    setRoutine(updatedRoutine);
-
-    const updatedDuration = routineDuration + product.duracion;
-    setRoutineDuration(updatedDuration);
-
-    if (allProducts.find((item) => item.id === product.id)) {
-      const products = allProducts.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setTotal(total + product.duracion);
-      setCountProducts(countProducts + 1);
-      return setAllProducts([...products]);
-    }
-
-    setTotal(total + product.duracion);
-    setCountProducts(countProducts + 1);
-    setAllProducts([...allProducts, product]);
-  };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -49,20 +26,28 @@ const ProductList = ({
     return `${minutes} min ${seconds} seg`;
   };
 
-  const onCreateRoutine = () => {
-    const routineData = {
-      name: `Rutina ${routine[0].nameEjercicio}`,
-      exercises: routine,
-      duration: routineDuration,
-    };
-    addProduct(routineData);
+  const onAddProduct = (product) => {
+    if (allProducts.find((item) => item.id === product.id)) {
+      const products = allProducts.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setTotal(total + product.duracion);
+      setCountProducts(countProducts + 1);
+      return setAllProducts([...products]);
+    }
 
-    setRoutine([]);
-    setRoutineDuration(0);
+    setTotal(total + product.duracion);
+    setCountProducts(countProducts + 1);
+    setAllProducts([...allProducts, product]);
+  };
+
+  const onRemoveProduct = (product) => {
+    const updatedRoutines = allProducts.filter((item) => item.id !== product.id);
+    setAllProducts(updatedRoutines);
   };
 
   return (
-    <div className="container-items">
+    <div className="container">
       <div className="search-bar">
         <input
           type="text"
@@ -72,26 +57,94 @@ const ProductList = ({
         />
       </div>
 
-      {filteredData.map((product) => (
-        <div className="item" key={product.id}>
-          <figure>
-            <img src={product.img} alt={product.nameEjercicio} />
-          </figure>
-          <div className="info-product">
-            <h2>{product.nameEjercicio}</h2>
-            <p>{product.descripcion}</p>
-            <p className="price">Duración: {formatDuration(product.duracion)}</p>
-            <button onClick={() => onAddProduct(product)}>
-              Añadir a la rutina
-            </button>
+      <div className="container-items">
+        {filteredData.map((product) => (
+          <div className="item" key={product.id}>
+            <figure>
+              <img src={product.img} alt={product.nameEjercicio} />
+            </figure>
+            <div className="info-product">
+              <h2>{product.nameEjercicio}</h2>
+              <p>{product.descripcion}</p>
+              <p className="price">Duración: {formatDuration(product.duracion)}</p>
+              <button onClick={() => onAddProduct(product)}>Añadir a la rutina</button>
+            </div>
+            
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       <style jsx>{`
-        .search-bar {
+        .container {
           text-align: center;
+        }
+
+        .search-bar {
           margin-bottom: 20px;
+        }
+
+        .container-items {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+        }
+
+        .item {
+          border-radius: 10px;
+        }
+
+        .item:hover {
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .item img {
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+          border-radius: 10px 10px 0 0;
+          transition: all 0.5s;
+        }
+
+        .item figure {
+          overflow: hidden;
+        }
+
+        .item:hover img {
+          transform: scale(1.2);
+        }
+
+        .info-product {
+          padding: 15px 30px;
+          line-height: 2;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          position: relative;
+        }
+
+        .price {
+          font-size: 18px;
+          font-weight: 900;
+        }
+
+        .info-product button {
+          border: none;
+          background: none;
+          background-color: #000;
+          color: #fff;
+          padding: 15px 10px;
+          cursor: pointer;
+        }
+
+        .remove-button {
+          border: none;
+          background: none;
+          color: red;
+          font-size: 20px;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
         }
       `}</style>
     </div>
