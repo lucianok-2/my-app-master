@@ -8,9 +8,9 @@ export const ProductList = ({
 	total,
 	setTotal,
 }) => {
-	const onAddProduct = product => {
-		if (allProducts.find(item => item.id === product.id)) {
-			const products = allProducts.map(item =>
+	const onAddProduct = (product) => {
+		if (allProducts.find((item) => item.id === product.id)) {
+			const products = allProducts.map((item) =>
 				item.id === product.id
 					? { ...item, quantity: item.quantity + 1 }
 					: item
@@ -27,14 +27,15 @@ export const ProductList = ({
 
 	return (
 		<div className='container-items'>
-			{data.map(product => (
+			{data.map((product) => (
 				<div className='item' key={product.id}>
 					<figure>
-						<img src={product.img} alt={product.nameProduct} />
+						<img src={product.img} alt={product.nameEjercicio} />
 					</figure>
 					<div className='info-product'>
-						<h2>{product.nameProduct}</h2>
-						<p className='price'>${product.price}</p>
+						<h2>{product.nameEjercicio}</h2>
+						<p>{product.descripcion}</p>
+						<p className='price'>Repeticiones :{product.repeticiones}</p>
 						<button onClick={() => onAddProduct(product)}>
 							Añadir al carrito
 						</button>
