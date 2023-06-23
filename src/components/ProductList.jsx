@@ -71,23 +71,7 @@ const ProductList = ({
         </div>
       ))}
 
-      <div className="routine-summary">
-        <h3>Rutina de Ejercicios</h3>
-        {routine.length > 0 ? (
-          <div>
-            <p>Duración Total: {routineDuration} min</p>
-            <ul>
-              {routine.map((exercise) => (
-                <li key={exercise.id}>
-                  {exercise.nameEjercicio} - Repeticiones: {exercise.repeticiones}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <p>No se ha añadido ningún ejercicio a la rutina.</p>
-        )}
-      </div>
+      
 
       <style jsx>{`
         .search-bar {
